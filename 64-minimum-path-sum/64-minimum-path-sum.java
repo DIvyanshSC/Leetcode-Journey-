@@ -37,7 +37,6 @@ class Solution {
                 }
 
             }
-            System.out.println(Arrays.toString(temp));
             prev = temp;
         }
 
