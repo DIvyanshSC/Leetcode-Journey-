@@ -2,23 +2,23 @@ class Solution {
     public int minPathSum(int[][] grid) {
         int n = grid.length;
         int m = grid[0].length;
-        int[][] dp = new int[n][m];
-        for(int[] i : dp) {
-            Arrays.fill(i, -1);
-        }
 
-//        return f(m-1, n-1, grid, dp);
-        return tabulated(n-1, m-1, grid, dp);
+        return tabulated(n-1, m-1, grid);
         
 
     }
 
-    private static int tabulated(int row, int col, int[][] grid, int[][] dp) {
+    private static int tabulated(int row, int col, int[][] grid) {
+        // Space Optimised
+        int[] prev = new int[col+1];
+        Arrays.fill(prev, -1);
+
         for(int r = 0; r <= row; r++) {
+            int[] temp = new int[col+1];
             for(int c = 0; c <= col; c++) {
 
                 if(r == 0 && c == 0) {
-                    dp[r][c] = grid[r][c];
+                    temp[c] = grid[r][c];
                 }
 
                 else {
@@ -26,18 +26,21 @@ class Solution {
                     int right = grid[r][c];
                     int down = grid[r][c];
 
-                    if (c > 0) right += dp[r][c - 1];
+                    if (c > 0) right += temp[c - 1];
                     else right += (int)Math.pow(10, 9);
 
-                    if (r > 0) down += dp[r - 1][c];
+                    if (r > 0) down += prev[c];
                     else down += (int)Math.pow(10, 9);
 
-                    dp[r][c] = Math.min(right, down);
+//                    dp[r][c] = Math.min(right, down);
+                    temp[c] = Math.min(right, down);
                 }
+
             }
+            System.out.println(Arrays.toString(temp));
+            prev = temp;
         }
 
-        return dp[row][col];
-    
+        return prev[col];
     }
 }
