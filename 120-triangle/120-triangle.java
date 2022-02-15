@@ -15,23 +15,25 @@ class Solution {
         // tabulation is always opposite to recursive memoization, hence here we go from n-1 to 0
         
         int n = grid.size();
-        int[][] dp = new int[n][n];
+        int[] prev = new int[n];
         for(int j = 0; j < n ; j++){
-            dp[n-1][j] = grid.get(n-1).get(j);
+            prev[j] = grid.get(n-1).get(j);
         }
         
         
         for(int r = n-2; r >= 0; r--) { // for each row
+            int[] temp = new int[r+1];
             for(int c = r; c >= 0; c--) { // for each column
-                int down = grid.get(r).get(c) + dp[r+1][c];
-                int dia = grid.get(r).get(c) + dp[r+1][c+1];
+                int down = grid.get(r).get(c) + prev[c];
+                int dia = grid.get(r).get(c) + prev[c+1];
 
-                dp[r][c] = Math.min(down, dia);
+                temp[c] = Math.min(down, dia);
             }
+            prev = temp;
         }
         
         
-        return dp[row][col];
+        return prev[col];
     }
     
         private static int f(int row, int col, List<List<Integer>> grid, int[][] dp) {
