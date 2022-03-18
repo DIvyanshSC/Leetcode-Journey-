@@ -1,5 +1,7 @@
 class Solution {
     public String removeDuplicateLetters(String s) {
+        
+        // https://leetcode.com/problems/remove-duplicate-letters/discuss/1859410/JavaC%2B%2B-DETAILED-%2B-VISUALLY-EXPLAINED-!!
         int[] lastIndex = new int[26];
         for (int i = 0; i < s.length(); i++){
             lastIndex[s.charAt(i) - 'a'] = i; // track the lastIndex of character presence
