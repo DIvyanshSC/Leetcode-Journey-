@@ -1,5 +1,9 @@
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
+        /*
+        Time Complexity: O(m + n)
+        Space Complexity: O(1)
+        */
         int[] ans = search(matrix, target);
         if(ans[0] == -1 && ans[1] == -1) {
             return false;
