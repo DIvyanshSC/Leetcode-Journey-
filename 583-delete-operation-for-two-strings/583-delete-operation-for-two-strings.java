@@ -1,5 +1,9 @@
 class Solution {
     public int minDistance(String word1, String word2) {
+        
+        // elements to be deleted = uncommon element in string1 + uncommon element in string2
+        // this would leave the common part in both strings
+        // common part is nothing but longest common subsequence
         int lcs = space_optimised(word1, word2);
         int ans = (word1.length() - lcs) + (word2.length() - lcs);
         return ans;
