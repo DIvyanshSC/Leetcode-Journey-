@@ -22,41 +22,42 @@ class Solution {
         // return spaceOptimised(m, n, obstacleGrid);
     }
     
-    private static int spaceOptimised(int n, int m, int[][] maze) {
-        // Write your code here.
-        int prev[] = new int[n];
+    private static int spaceOptimised(int row, int col, int[][] maze) {
+        int[] prev = new int[col];
 
-        for(int i=0; i<n; i++) {
+        for(int r = 0; r<row; r++) {
 
-            int temp[] = new int[m];
+            int[] temp = new int[col];
 
-            for(int j=0; j<m; j++) {
+            for(int c = 0; c < col; c++) {
 
-                if(i>0 && j>0 && maze[i][j] == 1) {
-                    temp[j]=0;
+                // base case
+                if(maze[r][c] == 1) {
+                    temp[c]=0;
                     continue;
                 }
 
-                if(i==0 && j==0){
-                    temp[j]=1;
+                if(r==0 && c==0){
+                    temp[c]=1;
                     continue;
                 }
 
+                // recursive case
                 int up=0;
                 int left =0;
 
-                if(i>0) up = prev[j];
+                if(r>0) up = prev[c];
 
-                if(j>0) left = temp[j-1];
+                if(c>0) left = temp[c-1];
 
-                temp[j] = up + left;
+                temp[c] = up + left;
             }
-            System.out.println(Arrays.toString(prev));
+            // System.out.println(Arrays.toString(prev));
             prev = temp;
 
         }
 
-        return prev[n-1];
+        return prev[row-1];
     }
     
     private static int tabulated(int[][] maze, int[][] dp, int m, int n) {
