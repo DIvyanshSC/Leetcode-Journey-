@@ -3,7 +3,7 @@ class Solution {
         
         // STATE SPACE OPTIMISED
         int size = strs.length;
-        int[][][] dp = new int[size + 1][zeroes + 1][ones + 1];
+        // int[][][] dp = new int[size + 1][zeroes + 1][ones + 1];
         int[][] prev = new int[zeroes + 1][ones + 1];
 
         for(int index = 0; index <= size; index++){
